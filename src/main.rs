@@ -20,6 +20,8 @@ struct Cli {
     youthful_mode: bool,
     #[structopt(short, long, default_value="")]
     eye_string: String,
+    #[structopt(short = "T", long, default_value="  ")]
+    tongue_string: String,
     message: String,
 }
 
@@ -62,8 +64,8 @@ fn main() {
       \\   ^__^
        \\  ({})\\_______
           (__)\\       )\\/\\
-              ||----w |
-              ||     ||", cow_eyes(&args));
+           {} ||----w |
+              ||     ||", cow_eyes(&args), args.tongue_string);
     
     println!(" {} \n< {} >\n {}{}", horizontal_dialog_line, args.message, horizontal_dialog_line, cow);
 }
