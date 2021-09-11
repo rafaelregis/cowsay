@@ -18,10 +18,15 @@ struct Cli {
     wired_mode: bool,
     #[structopt(short, long)]
     youthful_mode: bool,
+    #[structopt(short, long, default_value="")]
+    eye_string: String,
     message: String,
 }
 
 fn cow_eyes(args: &Cli) -> String {
+    if !args.eye_string.is_empty() {
+        return args.eye_string.clone();
+    }
     if args.borg_mode {
         return String::from("==");
     }
