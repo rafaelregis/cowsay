@@ -27,33 +27,33 @@ struct Cli {
 
 fn cow_eyes(args: &Cli) -> String {
     if !args.eye_string.is_empty() {
-        return args.eye_string.clone();
+        return args.eye_string.clone()
     }
     if args.borg_mode {
-        return String::from("==");
+        return String::from("==")
     }
     if args.dead_mode {
-        return String::from("XX");
+        return String::from("XX")
     }
     if args.greedy_mode {
-        return String::from("$$");
+        return String::from("$$")
     }
     if args.paranoid_mode {
-        return String::from("@@");
+        return String::from("@@")
     }
     if args.stoned_mode {
-        return String::from("**");
+        return String::from("**")
     }
     if args.tired_mode {
-        return String::from("--");
+        return String::from("--")
     }
     if args.wired_mode {
-        return String::from("OO");
+        return String::from("OO")
     }
     if args.youthful_mode {
-        return String::from("..");
+        return String::from("..")
     }
-    return String::from("oo");
+    String::from("oo")
 }
 
 fn main() {
