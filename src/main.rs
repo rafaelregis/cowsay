@@ -1,5 +1,4 @@
 use structopt::StructOpt;
-use std::io::stdin;
 
 #[derive(StructOpt)]
 struct Cli {
