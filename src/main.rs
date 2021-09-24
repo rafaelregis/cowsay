@@ -1,4 +1,5 @@
 use structopt::StructOpt;
+use std::io::stdin;
 
 #[derive(StructOpt)]
 struct Cli {
@@ -22,6 +23,7 @@ struct Cli {
     eye_string: String,
     #[structopt(short = "T", long, default_value="  ")]
     tongue_string: String,
+    #[structopt(default_value = "")]
     message: String,
 }
 
