@@ -22,8 +22,7 @@ struct Cli {
     eye_string: String,
     #[structopt(short = "T", long, default_value="  ")]
     tongue_string: String,
-    #[structopt(default_value = "")]
-    message: String,
+    message: Vec<String>,
 }
 
 fn cow_eyes(args: &Cli) -> String {
@@ -59,7 +58,10 @@ fn cow_eyes(args: &Cli) -> String {
 
 fn main() {
     let args = Cli::from_args();
-    let horizontal_dialog_line = "-".repeat(args.message.len() + 2);
+
+    let message = args.message.join(" ");
+
+    let horizontal_dialog_line = "-".repeat(message.len() + 2);
 
     let cow = format!("
       \\   ^__^
@@ -67,6 +69,6 @@ fn main() {
           (__)\\       )\\/\\
            {} ||----w |
               ||     ||", cow_eyes(&args), args.tongue_string);
-    
-    println!(" {} \n< {} >\n {}{}", horizontal_dialog_line, args.message, horizontal_dialog_line, cow);
+
+    println!(" {} \n< {} >\n {}{}", horizontal_dialog_line, message, horizontal_dialog_line, cow);
 }
