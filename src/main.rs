@@ -63,12 +63,12 @@ fn main() {
 
     let horizontal_dialog_line = "-".repeat(message.len() + 2);
 
-    let cow = format!("
-      \\   ^__^
-       \\  ({})\\_______
-          (__)\\       )\\/\\
+    let cow = format!(r#"
+      \   ^__^
+       \  ({})\_______
+          (__)\       )\/\
            {} ||----w |
-              ||     ||", cow_eyes(&args), args.tongue_string);
+              ||     ||"#, cow_eyes(&args), args.tongue_string);
 
     println!(" {} \n< {} >\n {}{}", horizontal_dialog_line, message, horizontal_dialog_line, cow);
 }
