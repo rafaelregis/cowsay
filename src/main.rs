@@ -1,3 +1,5 @@
+use std::{fs::File, io::Read};
+
 use structopt::StructOpt;
 
 #[derive(StructOpt)]
@@ -22,6 +24,8 @@ struct Cli {
     eye_string: String,
     #[structopt(short = "T", long, default_value="  ")]
     tongue_string: String,
+    #[structopt(short, long, default_value="")]
+    file_path: String,
     message: Vec<String>,
 }
 
@@ -74,12 +78,22 @@ fn main() {
 
     let horizontal_dialog_line = "-".repeat(message.len() + 2);
 
-    let cow = format!(r#"
-      \   ^__^
-       \  ({})\_______
-          (__)\       )\/\
-           {} ||----w |
-              ||     ||"#, cow_eyes, cow_tongue);
+    let file_path: String;
+    if args.file_path.is_empty() {
+        file_path = "src/cows/cow.cow".to_string();
+    } else if args.file_path.ends_with(".cow") {
+        file_path = args.file_path;
+    } else {
+        file_path = format!("src/cows/{}.cow", args.file_path);
+    }
+
+    let mut body_template = String::new();
+
+    let mut f = File::open(&file_path).unwrap();
+    f.read_to_string(&mut body_template).expect(
+        &format!("Couldn't read cowfile {}", file_path));
+
+    let cow = body_template.replace("%eye%", &cow_eyes).replace("%tongue%", &cow_tongue);
 
     println!(" {} \n< {} >\n {}{}", horizontal_dialog_line, message, horizontal_dialog_line, cow);
 }
