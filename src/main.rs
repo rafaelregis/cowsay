@@ -56,10 +56,19 @@ fn cow_eyes(args: &Cli) -> String {
     String::from("oo")
 }
 
+fn cow_tongue(args: &Cli) -> String {
+    if args.dead_mode {
+        return "U ".to_string();
+    }
+    return args.tongue_string.clone();
+}
+
 fn main() {
     let args = Cli::from_args();
 
     let message = args.message.join(" ");
+    let cow_eyes = cow_eyes(&args);
+    let cow_tongue = cow_tongue(&args);
 
     let horizontal_dialog_line = "-".repeat(message.len() + 2);
 
@@ -68,7 +77,7 @@ fn main() {
        \  ({})\_______
           (__)\       )\/\
            {} ||----w |
-              ||     ||"#, cow_eyes(&args), args.tongue_string);
+              ||     ||"#, cow_eyes, cow_tongue);
 
     println!(" {} \n< {} >\n {}{}", horizontal_dialog_line, message, horizontal_dialog_line, cow);
 }
