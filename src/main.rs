@@ -60,7 +60,9 @@ fn cow_tongue(args: &Cli) -> String {
     if args.dead_mode {
         return "U ".to_string();
     }
-    return args.tongue_string.clone();
+    let mut tongue_string= args.tongue_string.clone();
+    tongue_string.truncate(2);
+    return format!("{: <2}", tongue_string);
 }
 
 fn main() {
